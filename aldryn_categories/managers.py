@@ -13,16 +13,13 @@ from django.utils import six
 from django.utils.translation import ugettext_lazy as _
 from taggit.managers import (
     _TaggableManager,
-    TaggableManager,        # OK, we're sub-classing this
-    TaggableRel,            # TODO: Does this need re-implementation?
+    TaggableManager,
+    TaggableRel,
 )
 from taggit.models import GenericTaggedItemBase
 from taggit.utils import require_instance_manager
 
-from treebeard.ns_tree import NS_NodeManager
-
 from .models import CategorisedItem
-# from .forms import CategoryField
 
 try:
     from django.contrib.contenttypes.fields import GenericRelation
@@ -47,7 +44,7 @@ def _get_subclasses(model):
     return subclasses
 
 
-class _CategorisableManager(_TaggableManager, NS_NodeManager):
+class _CategorisableManager(_TaggableManager):
 
     def get_queryset(self):
         try:
@@ -55,7 +52,8 @@ class _CategorisableManager(_TaggableManager, NS_NodeManager):
         except (AttributeError, KeyError):
             return self.through.categories_for(self.model, self.instance)
 
-    get_query_set = get_queryset
+    if VERSION < (1, 7):
+        get_query_set = get_queryset
 
     def get_prefetch_queryset(self, instances, queryset=None):
         if queryset is not None:
@@ -125,7 +123,6 @@ class _CategorisableManager(_TaggableManager, NS_NodeManager):
 
 
 class CategorisableManager(TaggableManager):
-    # NOT modified
     _related_name_counter = 0
 
     def __init__(self,
@@ -133,6 +130,7 @@ class CategorisableManager(TaggableManager):
                  help_text=_("A comma-separated list of categories."),
                  through=None, blank=False, related_name=None, to=None,
                  manager=_CategorisableManager):
+        # NOTE: TaggableManager inherits from Field
         Field.__init__(self, verbose_name=verbose_name, help_text=help_text,
                        blank=blank, null=True, serialize=False)
         self.through = through or CategorisedItem

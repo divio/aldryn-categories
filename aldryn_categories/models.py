@@ -18,6 +18,9 @@ class CategoryBase(taggit.TagBase, treebeard.NS_Node):
     class Meta:
         abstract = True
 
+    # Treebeard requires this custom manager
+    objects = treebeard.NS_NodeManager()
+
 
 class Category(CategoryBase):
     """
