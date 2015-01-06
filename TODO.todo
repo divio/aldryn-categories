@@ -1,0 +1,4 @@
+Verify dependencies are sane:
+ ☐ django-treebeard 2.0 requirements for:
+   ☐ Python
+   ☐ Django
