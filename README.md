@@ -14,3 +14,4 @@
 1. Python v2.7+
 2. Django v1.6+
 3. django-treebeard v2.0+
+4. django-parler v1.2.1+

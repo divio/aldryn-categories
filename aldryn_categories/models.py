@@ -1,33 +1,47 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import unicode_literals
+
 from django.db import IntegrityError, models
 from django.template.defaultfilters import slugify as default_slugify
+from django.utils.translation import (
+    ugettext_lazy as _,
+    # get_language,
+)
+
+from parler.models import TranslatableModel, TranslatedFields
+# from parler.utils.context import switch_language
 
 from treebeard.ns_tree import NS_Node
 
 
-class CategoryBase(NS_Node):
+class Category(TranslatableModel, NS_Node):
     """
-    A category is just a hierarchical tag. The structure is implemented with
-    django-treebeard's Nested Sets trees, which has the performance
-    characteristics we're after, namely: fast reads at the expense of write-
-    speed.
+    A category is hierarchical. The structure is implemented with django-
+    treebeard's Nested Sets trees, which has the performance characteristics
+    we're after, namely: fast reads at the expense of write-speed.
     """
 
     node_order_by = ['name', ]
 
-    name = models.CharField(
-        blank=False,
-        default='',
-        max_length=255
-    )
-
-    slug = models.SlugField(
-        max_length=255
+    translations = TranslatedFields(
+        name=models.CharField(
+            _('name'),
+            blank=False,
+            default='',
+            max_length=255,
+        ),
+        slug=models.SlugField(
+            _('slug'),
+            help_text=_('Provide a “slug” or leave blank for an automatically generated one.'),
+            max_length=255,
+        )
     )
 
     class Meta:
-        abstract = True
+        # Sadly, an Abstract class cannot also be translatable.
+        verbose_name = _('category')
+        verbose_name_plural = _('categories')
 
     def slugify(self, category, i=None):
         slug = default_slugify(category)
@@ -39,7 +53,7 @@ class CategoryBase(NS_Node):
         if not self.pk and not self.slug:
             self.slug = self.slugify(self.name)
             try:
-                return super(CategoryBase, self).save(self, *args, **kwargs)
+                return super(Category, self).save(self, *args, **kwargs)
             except IntegrityError:
                 pass
 
@@ -52,16 +66,7 @@ class CategoryBase(NS_Node):
                 slug = self.slugify(self.name, i)
                 if slug not in slugs:
                     self.slug = slug
-                    return super(CategoryBase, self).save(self, *args, **kwargs)
+                    return super(Category, self).save(self, *args, **kwargs)
                 i += 1
         else:
-            return super(CategoryBase, self).save(self, *args, **kwargs)
-
-
-class Category(CategoryBase):
-    """
-    A thin but concrete implementation of CategoryBase.
-    """
-    class Meta:
-        verbose_name = 'category'
-        verbose_name_plural = 'categories'
+            return super(Category, self).save(self, *args, **kwargs)

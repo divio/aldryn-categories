@@ -1,8 +1,5 @@
-# -*- coding: utf-8 -*-
-
-import app_manage
-
 from django.conf.urls import patterns
+import app_manage
 
 urlpatterns = patterns('')
 
@@ -10,8 +7,8 @@ if __name__ == '__main__':
     app_manage.main(
         ['aldryn_categories', ],
         INSTALLED_APPS=[
-            'django.contrib.contenttypes',
-            'taggit',
+            'parler',
+            'treebeard',
             'aldryn_categories',
         ],
         DATABASES=app_manage.DatabaseConfig(

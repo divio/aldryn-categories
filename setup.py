@@ -4,8 +4,8 @@ from setuptools import setup, find_packages
 from aldryn_categories import __version__
 
 REQUIREMENTS = [
-    # 'django-cms>=3.0.3'
-    # 'aldryn-country-segment>=0.1.0'
+    'django-treebeard>=2.0',
+    'django-parler>=1.2.1',
     # git tag '[version]'
     # git push --tags origin master
     # python setup.py sdist upload
@@ -27,7 +27,7 @@ CLASSIFIERS = [
 setup(
     name='aldryn-categories',
     version=__version__,
-    description='Visitor categories for django CMS',
+    description='Heirarchical categories',
     author='Divio AG',
     author_email='info@divio.ch',
     url='https://github.com/aldryn/aldryn-categories',
