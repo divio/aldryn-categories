@@ -45,6 +45,8 @@ class Category(TranslatableModel, NS_Node):
         ),
         slug=models.SlugField(
             _('slug'),
+            blank=True,
+            default='',
             help_text=_('Provide a “slug” or leave blank for an automatically '
                         'generated one.'),
             max_length=255,
