@@ -11,8 +11,13 @@ from django.utils.translation import (
 
 from parler.models import TranslatableModel, TranslatedFields
 # from parler.utils.context import switch_language
+from parler.managers import TranslatableManager
 
-from treebeard.ns_tree import NS_Node
+from treebeard.ns_tree import NS_Node, NS_NodeManager
+
+
+class CategoryManager(NS_NodeManager, TranslatableManager):
+    pass
 
 
 #
@@ -45,6 +50,8 @@ class Category(TranslatableModel, NS_Node):
             max_length=255,
         )
     )
+
+    objects = CategoryManager()
 
     class Meta:
         verbose_name = _('category')
