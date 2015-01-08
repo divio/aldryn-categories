@@ -4,25 +4,25 @@ from __future__ import unicode_literals
 
 from django.db import IntegrityError, models
 from django.template.defaultfilters import slugify as default_slugify
-from django.utils.translation import (
-    ugettext_lazy as _,
-    # get_language,
-)
+from django.utils.translation import ugettext_lazy as _
 
 from parler.models import TranslatableModel, TranslatedFields
-# from parler.utils.context import switch_language
-from parler.managers import TranslatableManager
+from parler.managers import TranslatableManager, TranslatableQuerySet
 
-from treebeard.ns_tree import NS_Node, NS_NodeManager
+from treebeard.ns_tree import NS_Node, NS_NodeManager, NS_NodeQuerySet
 
 
-class CategoryManager(NS_NodeManager, TranslatableManager):
+class CategoryQuerySet(TranslatableQuerySet, NS_NodeQuerySet):
     pass
 
 
+class CategoryManager(TranslatableManager, NS_NodeManager):
+    queryset_class = CategoryQuerySet
+
+
 #
-# NOTE: I would have preferred to make this a base class "CategoryBase" which
-# is Abstract, then subclass it as a concreate Category class. But, Parler
+# TODO: I would have preferred to make this a base class "CategoryBase" which
+# is Abstract, then subclass it as a concrete Category class. But, Parler
 # cannot be applied to an Abstract class.
 #
 # TODO: At some point, consider an approach like this:
@@ -34,7 +34,6 @@ class Category(TranslatableModel, NS_Node):
     treebeard's Nested Sets trees, which has the performance characteristics
     we're after, namely: fast reads at the expense of write-speed.
     """
-    node_order_by = ['name', ]
 
     translations = TranslatedFields(
         name=models.CharField(
@@ -53,11 +52,11 @@ class Category(TranslatableModel, NS_Node):
         )
     )
 
-    objects = CategoryManager()
-
     class Meta:
         verbose_name = _('category')
         verbose_name_plural = _('categories')
+
+    objects = CategoryManager()
 
     def slugify(self, category, i=None):
         slug = default_slugify(category)
@@ -69,7 +68,7 @@ class Category(TranslatableModel, NS_Node):
         if not self.pk and not self.slug:
             self.slug = self.slugify(self.name)
             try:
-                return super(Category, self).save(self, *args, **kwargs)
+                return super(Category, self).save(*args, **kwargs)
             except IntegrityError:
                 pass
 
@@ -82,7 +81,10 @@ class Category(TranslatableModel, NS_Node):
                 slug = self.slugify(self.name, i)
                 if slug not in slugs:
                     self.slug = slug
-                    return super(Category, self).save(self, *args, **kwargs)
+                    return super(Category, self).save(*args, **kwargs)
                 i += 1
         else:
-            return super(Category, self).save(self, *args, **kwargs)
+            return super(Category, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.safe_translation_getter('name', any_language=True)
