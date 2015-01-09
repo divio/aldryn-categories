@@ -5,6 +5,7 @@ from __future__ import unicode_literals
 import django
 from django.db import IntegrityError, models
 from django.template.defaultfilters import slugify as default_slugify
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from parler.models import TranslatableModel, TranslatedFields
@@ -35,6 +36,7 @@ class CategoryManager(TranslatableManager, NS_NodeManager):
 # TODO: At some point, consider an approach like this:
 #     https://gist.github.com/GaretJax/7c7a9acc055c05c65041
 #
+@python_2_unicode_compatible
 class Category(TranslatableModel, NS_Node):
     """
     A category is hierarchical. The structure is implemented with django-
