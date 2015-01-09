@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from django.conf.urls import patterns
 import app_manage
 
