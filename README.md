@@ -40,4 +40,6 @@ models you wish to categorize, like so:
 	    categories = CategoryManyToManyField('aldryn_categories.Category')
 
 This usage of the CategoryManyToManyField simply allows your categories to be
-displayed heirarchically in the otherwise normal MultipleSelectWidget.
+displayed heirarchically in the otherwise normal MultipleSelectWidget like so:
+
+![](diagrams/category-widget-preview.png?raw=true)
