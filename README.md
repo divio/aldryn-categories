@@ -4,7 +4,7 @@
 
 1. Provide a heirarchical categorizing capability that could be used to tag arbitrary
    content throughout a project with a common set of categories.
-2. Categories should be Internationalisable.
+2. Categories should be Internationalizable.
 3. Should be largely compatible with (but decoupled from) django-taggit.
 4. Should be extensible: possible to extend the base tag/category model to add arbitrary
    fields/methods.
