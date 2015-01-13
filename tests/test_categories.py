@@ -116,7 +116,7 @@ class TestCategoryParler(CategoryTestCase):
     """django-parler related tests"""
 
     def test_add_translations(self):
-        names = [
+        values = [
             # language code, name, slug
             ('en', "Cheese Omelette", "cheese-omelette"),
             ('de', "Käseomelett", "kaseomelett"),
@@ -126,7 +126,7 @@ class TestCategoryParler(CategoryTestCase):
         node = None
 
         # Create the translations
-        for lang, name, slug in names:
+        for lang, name, slug in values:
             if node:
                 with switch_language(node, lang):
                     node.name = name
@@ -136,7 +136,7 @@ class TestCategoryParler(CategoryTestCase):
                     node = Category.add_root(name=name)
 
         # Now test that they exist (and didn't obliterate one another)
-        for lang, name, slug in names:
+        for lang, name, slug in values:
             with switch_language(node, lang):
                 self.assertEqual(node.name, name)
                 self.assertEqual(node.slug, slug)
