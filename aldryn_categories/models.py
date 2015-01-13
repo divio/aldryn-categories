@@ -74,7 +74,7 @@ class Category(TranslatableModel, NS_Node):
         return slug
 
     def save(self, *args, **kwargs):
-        if not self.pk and not self.slug:
+        if not self.slug:
             self.slug = self.slugify(self.name)
             try:
                 return super(Category, self).save(*args, **kwargs)
