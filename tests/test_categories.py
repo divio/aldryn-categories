@@ -2,18 +2,11 @@
 
 from __future__ import unicode_literals
 
-import random
-import string
-
 from django.test import TestCase  # , TransactionTestCase
 from django.utils import translation
 from parler.utils.context import switch_language
 
 from aldryn_categories.models import Category
-
-
-def rand_str(prefix='', length=23, chars=string.ascii_letters):
-    return prefix + ''.join(random.choice(chars) for _ in range(length))
 
 
 class CategoryTestCase(TestCase):
