@@ -9,8 +9,8 @@ from parler.utils.context import switch_language
 from aldryn_categories.models import Category
 
 
-class CategoryTestCase(TestCase):
-    """Base class for testing Categories"""
+class CategoryTestCaseMixin(object):
+    """Mixin class for testing Categories"""
 
     @staticmethod
     def reload(node):
@@ -23,7 +23,7 @@ class CategoryTestCase(TestCase):
         return node.__class__.objects.get(id=node.id)
 
 
-class TestCategories(CategoryTestCase):
+class TestCategories(CategoryTestCaseMixin, TestCase):
     """Implementation-specific tests"""
 
     def test_category_slug_creation(self):
@@ -34,7 +34,7 @@ class TestCategories(CategoryTestCase):
         self.assertEquals(root.slug, "root-node")
 
 
-class TestCategoryTrees(CategoryTestCase):
+class TestCategoryTrees(CategoryTestCaseMixin, TestCase):
     """django-treebeard related tests"""
 
     def test_create_in_mem_category(self):
@@ -105,7 +105,7 @@ class TestCategoryTrees(CategoryTestCase):
         self.assertEqual(b, c.get_parent())
 
 
-class TestCategoryParler(CategoryTestCase):
+class TestCategoryParler(CategoryTestCaseMixin, TestCase):
     """django-parler related tests"""
 
     def test_add_translations(self):
