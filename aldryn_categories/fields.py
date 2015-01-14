@@ -34,7 +34,7 @@ class CategoryManyToManyField(ManyToManyField):
     which has a heirarchically displayed set of choices.
     """
     def formfield(self, form_class=CategoryMultipleChoiceField,
-            choices_form_class=None, **kwargs):
+                  choices_form_class=None, **kwargs):
         kwargs["form_class"] = form_class
         kwargs["choices_form_class"] = choices_form_class
         return super(CategoryManyToManyField, self).formfield(**kwargs)
