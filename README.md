@@ -2,7 +2,7 @@
 [![](https://pypip.in/v/aldryn-categories/badge.svg)](https://pypi.python.org/pypi/aldryn-categories/)
 [![](https://pypip.in/d/aldryn-categories/badge.svg)](https://pypi.python.org/pypi/aldryn-categories/)
 [![](https://pypip.in/wheel/aldryn-categories/badge.svg)](https://pypi.python.org/pypi/aldryn-categories/)
-[![](https://pypip.in/license/aldryn-categories/badge.svg)](https://pypi.python.org/pypi/aldryn-categories/)
+[![](https://pypip.in/license/aldryn-categories/badge.svg)](https://github.com/aldryn/aldryn-categories/blob/master/LICENSE.txt)
 
 # Aldryn Categories
 
