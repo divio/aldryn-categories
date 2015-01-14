@@ -22,7 +22,10 @@ class CategoryManager(TranslatableManager, NS_NodeManager):
     queryset_class = CategoryQuerySet
 
     def get_queryset(self):
-        return self.queryset_class(self.model, using=self._db).order_by('tree_id', 'lft')
+        return self.queryset_class(
+            self.model,
+            using=self._db
+        ).order_by('tree_id', 'lft')
 
     if django.VERSION < (1, 8):
         get_query_set = get_queryset
