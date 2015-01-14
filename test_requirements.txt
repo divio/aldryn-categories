@@ -1,6 +1,7 @@
 django-parler
 django-treebeard>=2.0
 django>=1.6,<1.7
+djangocms-helper
 flake8
 six
 South

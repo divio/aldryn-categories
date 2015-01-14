@@ -17,12 +17,11 @@ python:
 matrix:
   allow_failures:
     - python: 3.3
-    - python: 3.4
-    - env: CMD="aldryn_categories"
+    - env: CMD="flake8 aldryn_categories"
   fast_finish: true
   include:
     - python: 2.7
-      env: CMD="aldryn_categories"
+      env: CMD="flake8 aldryn_categories"
 
 cache:
   directories:
