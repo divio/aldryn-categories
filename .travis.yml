@@ -9,15 +9,14 @@ env:
   - CMD=./test
 
 python:
-  - 2.7
   - 2.6
-  - 3.4
+  - 2.7
   - 3.3
+  - 3.4
 
 matrix:
   allow_failures:
     - python: 3.3
-    - python: 3.4
     - env: CMD="flake8 aldryn_categories"
   fast_finish: true
   include:
