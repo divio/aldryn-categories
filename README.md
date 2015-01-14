@@ -1,4 +1,8 @@
-![](https://travis-ci.org/aldryn/aldryn-categories.svg?branch=master)
+![https://travis-ci.org/aldryn/aldryn-categories](https://travis-ci.org/aldryn/aldryn-categories.svg?branch=master)
+![https://pypi.python.org/pypi/aldryn-categories/](https://pypip.in/v/aldryn-categories/badge.svg)
+![https://pypi.python.org/pypi/aldryn-categories/](https://pypip.in/d/aldryn-categories/badge.svg)
+![https://pypi.python.org/pypi/aldryn-categories/](https://pypip.in/wheel/aldryn-categories/badge.svg)
+![https://pypi.python.org/pypi/aldryn-categories/](https://pypip.in/license/aldryn-categories/badge.svg)
 
 # Aldryn Categories
 
