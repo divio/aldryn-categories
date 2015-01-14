@@ -1,3 +1,3 @@
 # -*- coding: utf-8 -*-
 
-from test_categories import CategoryTestCaseMixin
+from .test_categories import CategoryTestCaseMixin
