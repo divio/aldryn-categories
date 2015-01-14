@@ -19,6 +19,7 @@ matrix:
   #   - env: CMD="flake8 aldryn_categories"
   fast_finish: true
   include:
+    - python: 2.7
     - env: CMD="flake8 aldryn_categories"
 
 cache:
