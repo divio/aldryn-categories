@@ -1,13 +1,10 @@
 # Aldryn Categories
 
-## Project Goals
+Aldryn Categories is a simple project that provides hierarchical *categories* as
+an independent model in your project. Categories are similar to *tags*, but are
+structured into a taxonomy. The project is suitable for I18N projects as
+Categories are fully translatable.
 
-1. Provide a heirarchical categorizing capability that could be used to tag arbitrary
-   content throughout a project with a common set of categories.
-2. Categories should be Internationalizable.
-3. Should be largely compatible with (but decoupled from) django-taggit.
-4. Should be extensible: possible to extend the base tag/category model to add arbitrary
-   fields/methods.
 
 ### Dependencies/Support
 
@@ -17,10 +14,13 @@
 4. django-parler v1.2.1+
 
 
-## Usage
+## Installation & Usage
 
-To use Aldryn Categories, install the package (currently, only available from
-its GitHub repository) with:
+To use Aldryn Categories, install the package with either:
+
+	`pip install aldryn-categories`
+
+Or directly from the GitHub repository with:
 
 	`pip install https://github.com/aldryn/aldryn-categories/archive/master.zip`
 

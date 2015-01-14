@@ -3,40 +3,38 @@
 from setuptools import setup, find_packages
 from aldryn_categories import __version__
 
-REQUIREMENTS = [
-    'django-treebeard>=2.0',
-    'django-parler>=1.2.1',
-    # git tag '[version]'
-    # git push --tags origin master
-    # python setup.py sdist upload
-]
-
-CLASSIFIERS = [
-    'Development Status :: 2 - Pre-Alpha',
-    'Environment :: Web Environment',
-    'Framework :: Django',
-    'Intended Audience :: Developers',
-    'License :: OSI Approved :: BSD License',
-    'Operating System :: OS Independent',
-    'Programming Language :: Python',
-    'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
-    'Topic :: Software Development',
-    'Topic :: Software Development :: Libraries :: Application Frameworks',
-]
+# git tag '[version]'
+# git push --tags origin master
+# python setup.py sdist upload
 
 setup(
     name='aldryn-categories',
     version=__version__,
-    description='Heirarchical categories',
+    url='https://github.com/aldryn/aldryn-categories',
+    license='LICENSE.txt',
+    description='Heirarchical categories/taxonomies for your Django project',
+    long_description=open('README.md').read(),
     author='Divio AG',
     author_email='info@divio.ch',
-    url='https://github.com/aldryn/aldryn-categories',
-    packages=find_packages(),
     package_data={},
-    license='LICENSE.txt',
+    packages=find_packages(),
     platforms=['OS Independent'],
-    install_requires=REQUIREMENTS,
-    classifiers=CLASSIFIERS,
+    classifiers=[
+        'Development Status :: 4 - Beta',
+        'Environment :: Web Environment',
+        'Framework :: Django',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: BSD License',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python',
+        'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
+        'Topic :: Software Development',
+        'Topic :: Software Development :: Libraries',
+    ],
+    install_requires=[
+        'django-parler>=1.2.1',
+        'django-treebeard>=2.0',
+    ],
     include_package_data=True,
     zip_safe=False
 )
