@@ -1,3 +1,5 @@
+![](https://travis-ci.org/aldryn/aldryn-categories.svg?branch=master)
+
 # Aldryn Categories
 
 Aldryn Categories is a simple project that provides hierarchical *categories* as
