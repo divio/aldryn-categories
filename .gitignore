@@ -4,3 +4,4 @@
 *.sublime-workspace
 aldryn_categories.egg-info
 dist
+.coverage
