@@ -4,6 +4,7 @@ branch = False
 omit =
     *migrations*
     *south_migrations*
+    *tests*
 
 [report]
 exclude_lines =
