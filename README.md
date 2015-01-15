@@ -1,4 +1,5 @@
 [![](https://travis-ci.org/aldryn/aldryn-categories.svg?branch=master)](https://travis-ci.org/aldryn/aldryn-categories/)
+[![Coverage Status](https://coveralls.io/repos/aldryn/aldryn-categories/badge.svg)](https://coveralls.io/r/aldryn/aldryn-categories)
 [![](https://pypip.in/v/aldryn-categories/badge.svg)](https://pypi.python.org/pypi/aldryn-categories/)
 [![](https://pypip.in/d/aldryn-categories/badge.svg)](https://pypi.python.org/pypi/aldryn-categories/)
 [![](https://pypip.in/wheel/aldryn-categories/badge.svg)](https://pypi.python.org/pypi/aldryn-categories/)
