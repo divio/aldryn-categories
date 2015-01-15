@@ -30,7 +30,6 @@ install:
   - pip wheel --wheel-dir $HOME/.wheelhouse -r test_requirements.txt
   - pip install --use-wheel --no-index --find-links=$HOME/.wheelhouse -r test_requirements.txt
 
-script: $CMD
+script: coverage run test_settings.py
 
-# TODO: Add coverage reporting
-# after_success: coveralls
+after_success: coveralls

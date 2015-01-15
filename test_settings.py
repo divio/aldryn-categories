@@ -3,7 +3,7 @@ HELPER_SETTINGS = {
     'LANGUAGES': (
         ('en', 'English'),
         ('de', 'German'),
-        ('de', 'French'),
+        ('fr', 'French'),
     ),
     'INSTALLED_APPS': [
         'parler',
@@ -11,3 +11,11 @@ HELPER_SETTINGS = {
         'aldryn_categories',
     ],
 }
+
+
+def run():
+    from djangocms_helper import runner
+    runner.cms('aldryn_categories')
+
+if __name__ == "__main__":
+    run()
