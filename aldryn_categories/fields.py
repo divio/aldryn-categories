@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
-import warnings
+from __future__ import unicode_literals
+# import warnings
 
+from django.core.exceptions import ImproperlyConfigured
 from django.db.models.fields.related import ManyToManyField
 from django.forms.models import ModelMultipleChoiceField
 from django.utils.safestring import mark_safe
@@ -14,19 +16,20 @@ except:
 
 
 class CategoryMultipleChoiceField(ModelMultipleChoiceField):
-    """Displays the choices heirarchically as per their position in the tree.
-    """
+    """Displays choices heirarchically as per their position in the tree."""
     def label_from_instance(self, obj):
         prefix = ''
         try:
             if obj.depth > 1:
                 prefix = '&nbsp;&nbsp;' * (obj.depth - 1)
+
+            return mark_safe("{prefix}{name}".format(
+                prefix=prefix, name=obj.name
+            ))
         except:
-            warnings.warn(
+            raise ImproperlyConfigured(
                 "CategoryMultipleChoiceField should only be used for M2M "
                 "relations to the aldryn_categories.Category model.")
-
-        return mark_safe("{prefix}{name}".format(prefix=prefix, name=obj.name))
 
 
 class CategoryManyToManyField(ManyToManyField):
