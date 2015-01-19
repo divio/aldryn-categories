@@ -2,11 +2,14 @@
 
 from __future__ import unicode_literals
 
-from django.test import TestCase  # , TransactionTestCase
+from django.core.exceptions import ImproperlyConfigured
+from django.test import TestCase, TransactionTestCase
 from django.utils import translation
 from parler.utils.context import switch_language
 
 from aldryn_categories.models import Category
+from aldryn_categories.fields import (
+    CategoryMultipleChoiceField, CategoryManyToManyField)
 
 
 class CategoryTestCaseMixin(object):
@@ -23,7 +26,7 @@ class CategoryTestCaseMixin(object):
         return node.__class__.objects.get(id=node.id)
 
 
-class TestCategories(CategoryTestCaseMixin, TestCase):
+class TestCategories(CategoryTestCaseMixin, TransactionTestCase):
     """Implementation-specific tests"""
 
     def test_category_slug_creation(self):
@@ -32,6 +35,21 @@ class TestCategories(CategoryTestCaseMixin, TestCase):
         root.set_current_language("en")
         root.save()
         self.assertEquals(root.slug, "root-node")
+
+    def test_slug_collision(self):
+        root = Category.add_root(name="test")
+        root.save()
+        root = self.reload(root)
+        self.assertEquals(root.slug, "test")
+        child1 = root.add_child(name="test")
+        self.assertEquals(child1.slug, "test_1")
+        child2 = root.add_child(name="test")
+        self.assertEquals(child2.slug, "test_2")
+
+    def test_str(self):
+        root = Category.add_root(name="test")
+        root.save()
+        self.assertEqual(root.name, str(root))
 
 
 class TestCategoryTrees(CategoryTestCaseMixin, TestCase):
@@ -133,3 +151,32 @@ class TestCategoryParler(CategoryTestCaseMixin, TestCase):
             with switch_language(node, lang):
                 self.assertEqual(node.name, name)
                 self.assertEqual(node.slug, slug)
+
+
+class TestCategoryField(CategoryTestCaseMixin, TestCase):
+
+    def test_category_multiple_choice_field(self):
+        root = Category.add_root(name="root")
+        root.save()
+        child1 = root.add_child(name="child1")
+        child2 = root.add_child(name="child2")
+        grandchild1 = child1.add_child(name="grandchild1")
+        root = self.reload(root)
+        child1 = self.reload(child1)
+        field = CategoryMultipleChoiceField(None)
+        self.assertEqual(
+            field.label_from_instance(child2),
+            "&nbsp;&nbsp;child2",
+        )
+        self.assertEqual(
+            field.label_from_instance(grandchild1),
+            "&nbsp;&nbsp;&nbsp;&nbsp;grandchild1",
+        )
+        with self.assertRaises(ImproperlyConfigured):
+            field.label_from_instance(object)
+
+    def test_category_many_to_many_field(self):
+        field = CategoryManyToManyField(Category)
+        self.assertTrue(
+            isinstance(field.formfield(), CategoryMultipleChoiceField)
+        )
