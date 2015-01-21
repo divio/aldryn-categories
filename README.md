@@ -16,20 +16,29 @@ Categories are fully translatable.
 ### Dependencies/Support
 
 1. Python v2.7+
-2. Django v1.6.x + South v1.0.2 or Django v1.7+
+2. Django v1.6.x + South v1.0.2+ (see note below) or Django v1.7+
 3. django-treebeard v2.0+
 4. django-parler v1.2.1+
+
+If you're using Django 1.6 with South and you cannot upgrade to version 1.0.3 or
+later, then try adding this to your settings:
+
+    MIGRATION_MODULES = {
+        …
+        'aldryn_categories': 'aldryn_categories.south_migrations',
+        …
+    }
 
 
 ## Installation & Usage
 
 To use Aldryn Categories, install the package with either:
 
-	`pip install aldryn-categories`
+    `pip install aldryn-categories`
 
 Or directly from the GitHub repository with:
 
-	`pip install https://github.com/aldryn/aldryn-categories/archive/master.zip`
+    `pip install https://github.com/aldryn/aldryn-categories/archive/master.zip`
 
 Next, add `aldryn_categories` to your `INSTALLED_APPS`.
 
