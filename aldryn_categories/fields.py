@@ -35,8 +35,13 @@ class CategoryMultipleChoiceField(ModelMultipleChoiceField):
 class CategoryManyToManyField(ManyToManyField):
     """
     Simply a normal ManyToManyField, but with a custom *default* form field
-    which has a heirarchically displayed set of choices.
+    which heirarchically displays the set of choices.
     """
+
+    # This is necessary for Django 1.7.4+
+    def get_internal_type(self):
+        return 'ManyToManyField'
+
     def formfield(self, form_class=CategoryMultipleChoiceField,
                   choices_form_class=None, **kwargs):
         kwargs["form_class"] = form_class
@@ -44,6 +49,7 @@ class CategoryManyToManyField(ManyToManyField):
         return super(CategoryManyToManyField, self).formfield(**kwargs)
 
 
+# This is necessary for South
 if add_introspection_rules:
     add_introspection_rules([], [
         "^aldryn_categories\.fields\.CategoryManyToManyField"
