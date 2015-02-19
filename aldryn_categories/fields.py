@@ -24,16 +24,17 @@ class CategoryMultipleChoiceField(ModelMultipleChoiceField):
                 prefix = '&nbsp;&nbsp;' * (obj.depth - 1)
 
             return mark_safe("{prefix}{name}".format(
-                prefix=prefix, name=obj.name
+                prefix=prefix, name=obj.safe_translation_getter('name')
             ))
-        except:
+        except AttributeError:
             raise ImproperlyConfigured(
                 "CategoryMultipleChoiceField should only be used for M2M "
                 "relations to the aldryn_categories.Category model.")
 
 
 class CategoryManyToManyField(ManyToManyField):
-    """Simply a normal ManyToManyField, but with a custom *default* form field
+    """
+    Simply a normal ManyToManyField, but with a custom *default* form field
     which has a heirarchically displayed set of choices.
     """
     def formfield(self, form_class=CategoryMultipleChoiceField,

@@ -2,14 +2,18 @@
 
 from __future__ import unicode_literals
 
+from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.test import TestCase, TransactionTestCase
 from django.utils import translation
+
 from parler.utils.context import switch_language
 
 from aldryn_categories.models import Category
 from aldryn_categories.fields import (
-    CategoryMultipleChoiceField, CategoryManyToManyField)
+    CategoryMultipleChoiceField,
+    CategoryManyToManyField,
+)
 
 
 class CategoryTestCaseMixin(object):
@@ -145,12 +149,22 @@ class TestCategoryParler(CategoryTestCaseMixin, TestCase):
             else:
                 with translation.override(lang):
                     node = Category.add_root(name=name)
+                    node.save()
 
         # Now test that they exist (and didn't obliterate one another)
         for lang, name, slug in values:
             with switch_language(node, lang):
                 self.assertEqual(node.name, name)
                 self.assertEqual(node.slug, slug)
+
+        # Now test that we gracefully handle languages where there is no
+        # translation.
+        with switch_language(node, 'it'):
+            try:
+                node.name
+            except:
+                self.fail("Translating to an unavailable language should not "
+                          "result in an exception.")
 
 
 class TestCategoryField(CategoryTestCaseMixin, TestCase):
@@ -172,8 +186,20 @@ class TestCategoryField(CategoryTestCaseMixin, TestCase):
             field.label_from_instance(grandchild1),
             "&nbsp;&nbsp;&nbsp;&nbsp;grandchild1",
         )
+
+        # Tests that the field correctly throws an ImproperlyConfigured
+        # exception if the given object is not a Category (or something that
+        # acts like one)
         with self.assertRaises(ImproperlyConfigured):
             field.label_from_instance(object)
+
+        # Check that using an untranslated language does not raise exceptions
+        with switch_language(child1, 'it'):
+            try:
+                field.label_from_instance(child1)
+            except ImproperlyConfigured:
+                self.fail("Translating to an unavailable language should not "
+                          "result in an exception.")
 
     def test_category_many_to_many_field(self):
         field = CategoryManyToManyField(Category)
