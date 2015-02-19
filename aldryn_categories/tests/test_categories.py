@@ -55,6 +55,16 @@ class TestCategories(CategoryTestCaseMixin, TransactionTestCase):
         root.save()
         self.assertEqual(root.name, str(root))
 
+    def test_delete(self):
+        root = Category.add_root(name="test")
+        root.save()
+        try:
+            root.delete()
+        except TypeError:
+            self.fail('Deleting a node throws a TypeError.')
+        except:
+            self.fail('Deleting a node throws an exception.')
+
 
 class TestCategoryTrees(CategoryTestCaseMixin, TestCase):
     """django-treebeard related tests"""
