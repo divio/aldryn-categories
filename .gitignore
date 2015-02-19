@@ -5,3 +5,4 @@
 aldryn_categories.egg-info
 dist
 .coverage
+build
