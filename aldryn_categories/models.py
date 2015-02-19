@@ -121,5 +121,13 @@ class Category(TranslatableModel, NS_Node):
         else:
             return super(Category, self).save(*args, **kwargs)
 
+    def delete(self, using=None):
+        #
+        # We're simply managing how the two superclasses perform deletion
+        # together here.
+        #
+        self.__class__.objects.filter(pk=self.pk).delete(using)
+        super(TranslatableModel, self).delete()
+
     def __str__(self):
         return self.safe_translation_getter('name', any_language=True)
