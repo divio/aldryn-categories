@@ -1,7 +1,7 @@
 .. image:: https://travis-ci.org/aldryn/aldryn-categories.svg?branch=master
     :target: https://travis-ci.org/aldryn/aldryn-categories/
-.. image:: https://coveralls.io/repos/aldryn/aldryn-categories/badge.svg
-    :target: https://coveralls.io/r/aldryn/aldryn-categories
+.. image:: https://coveralls.io/repos/aldryn/aldryn-categories/badge.svg?branch=master
+  :target: https://coveralls.io/r/aldryn/aldryn-categories?branch=master
 .. image:: https://pypip.in/v/aldryn-categories/badge.svg
     :target: https://pypi.python.org/pypi/aldryn-categories/
 .. image:: https://pypip.in/d/aldryn-categories/badge.svg
