@@ -18,16 +18,12 @@ env:
     - DJANGO=1.7 CMD=./test
 
 matrix:
-  allow_failures:
-    - python: 2.6
-      env: DJANGO=1.4 CMD=./test
+  # allow_failures:
   exclude:
     - python: 2.6
       env: DJANGO=1.7 CMD=./test
   fast_finish: true
   include:
-    - python: 2.6
-      env: DJANGO=1.4 CMD=./test
     - python: 2.7
       env: DJANGO=1.7 CMD="flake8 aldryn_categories"
 
