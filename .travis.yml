@@ -6,6 +6,11 @@ language: python
 sudo: false
 
 env:
+  matrix:
+    - DJANGO=1.4 CMD=./test
+    - DJANGO=1.5 CMD=./test
+    - DJANGO=1.6 CMD=./test
+    - DJANGO=1.7 CMD=./test
   - CMD=./test
 
 python:
@@ -17,10 +22,13 @@ python:
 matrix:
   # allow_failures:
   #   - env: CMD="flake8 aldryn_categories"
+  exclude:
+    - python: 2.6
+      env: DJANGO=1.7 CMS=./test
   fast_finish: true
   include:
     - python: 2.7
-      env: CMD="flake8 aldryn_categories"
+      env: DJANGO=1.7 CMD="flake8 aldryn_categories"
 
 cache:
   directories:
@@ -28,7 +36,7 @@ cache:
 
 install:
   - pip wheel --wheel-dir $HOME/.wheelhouse -r test_requirements.txt
-  - pip install --use-wheel --no-index --find-links=$HOME/.wheelhouse -r test_requirements.txt
+  - pip install --use-wheel --no-index --find-links=$HOME/.wheelhouse -r "test_requirements/django-$DJANGO.txt"
 
 script: coverage run test_settings.py
 
