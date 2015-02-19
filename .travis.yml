@@ -7,25 +7,26 @@ sudo: false
 
 python:
   - 2.7
-  - 2.6
-  - 3.4
   - 3.3
+  - 3.4
 
 env:
   matrix:
-    - DJANGO=1.4 CMD=./test
     - DJANGO=1.5 CMD=./test
     - DJANGO=1.6 CMD=./test
     - DJANGO=1.7 CMD=./test
 
 matrix:
-  # allow_failures:
-  #   - env: CMD="flake8 aldryn_categories"
+  allow_failures:
+    - python: 2.6
+      env: DJANGO=1.4 CMD=./test
   exclude:
     - python: 2.6
-      env: DJANGO=1.7 CMS=./test
+      env: DJANGO=1.7 CMD=./test
   fast_finish: true
   include:
+    - python: 2.6
+      env: DJANGO=1.4 CMD=./test
     - python: 2.7
       env: DJANGO=1.7 CMD="flake8 aldryn_categories"
 
