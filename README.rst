@@ -1,7 +1,7 @@
 .. image:: https://travis-ci.org/aldryn/aldryn-categories.svg?branch=master
     :target: https://travis-ci.org/aldryn/aldryn-categories/
 .. image:: https://coveralls.io/repos/aldryn/aldryn-categories/badge.svg?branch=master
-  :target: https://coveralls.io/r/aldryn/aldryn-categories?branch=master
+    :target: https://coveralls.io/r/aldryn/aldryn-categories?branch=master
 .. image:: https://pypip.in/v/aldryn-categories/badge.svg
     :target: https://pypi.python.org/pypi/aldryn-categories/
 .. image:: https://pypip.in/d/aldryn-categories/badge.svg
@@ -27,13 +27,13 @@ Categories are fully translatable.
 Dependencies/Support
 ~~~~~~~~~~~~~~~~~~~~
 
-1. Python v2.7+
-2. Django v1.6.x + South v1.0.2+ (see note below) or Django v1.7+
+1. Python v2.6+
+2. Django v1.5.x + South v1.0.2+ (see note below) or Django v1.7+
 3. django-treebeard v2.0+
 4. django-parler v1.2.1+
 
-If you're using Django 1.6 with South and you cannot upgrade to version 1.0.3 or
-later, then try adding this to your settings: ::
+If you're using Django <1.7 with South and you cannot upgrade to version 1.0.3
+or later, then try adding this to your settings: ::
 
     MIGRATION_MODULES = {
         …

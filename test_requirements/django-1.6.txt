@@ -1,0 +1,4 @@
+django>=1.6,<1.7
+South>=1.0.2
+
+-r base.txt
