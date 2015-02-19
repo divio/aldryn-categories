@@ -6,6 +6,7 @@ from aldryn_categories import __version__
 # git tag '[version]'
 # git push --tags origin master
 # python setup.py sdist upload
+# python setup.py bdist_wheel upload
 
 setup(
     name='aldryn-categories',
