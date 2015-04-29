@@ -1,0 +1,6 @@
+{
+    "package-name": "aldryn-categories",
+    "installed-apps": [
+        "aldryn_categories"
+    ]
+}
