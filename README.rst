@@ -10,6 +10,9 @@
     :target: https://pypi.python.org/pypi/aldryn-categories/
 .. image:: https://pypip.in/license/aldryn-categories/badge.svg
     :target: https://github.com/aldryn/aldryn-categories/blob/master/LICENSE.txt
+.. image:: https://codeclimate.com/github/aldryn/aldryn-categories/badges/gpa.svg
+   :target: https://codeclimate.com/github/aldryn/aldryn-categories
+   :alt: Code Climate
 
 =================
 Aldryn Categories
