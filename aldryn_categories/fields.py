@@ -11,12 +11,12 @@ from django.utils.safestring import mark_safe
 # For South, where used.
 try:
     from south.modelsinspector import add_introspection_rules
-except:
+except:  # pragma: no cover
     add_introspection_rules = False
 
 
 class CategoryModelChoiceField(ModelChoiceField):
-    """Displays choices heirarchically as per their position in the tree."""
+    """Displays choices hierarchically as per their position in the tree."""
     def label_from_instance(self, obj):
         prefix = ''
         try:
@@ -35,7 +35,7 @@ class CategoryModelChoiceField(ModelChoiceField):
 class CategoryForeignKey(ForeignKey):
     """
     Simply a normal ForeignKey field, but with a custom *default* form field
-    which heirarchically displays the set of choices.
+    which hierarchically displays the set of choices.
     """
 
     # This is necessary for Django 1.7.4+
@@ -52,7 +52,7 @@ class CategoryForeignKey(ForeignKey):
 class CategoryOneToOneField(OneToOneField):
     """
     Simply a normal OneToOneField field, but with a custom *default* form field
-    which heirarchically displays the set of choices.
+    which hierarchically displays the set of choices.
     """
     # This is necessary for Django 1.7.4+
     def get_internal_type(self):
@@ -66,7 +66,7 @@ class CategoryOneToOneField(OneToOneField):
 
 
 class CategoryMultipleChoiceField(ModelMultipleChoiceField):
-    """Displays choices heirarchically as per their position in the tree."""
+    """Displays choices hierarchically as per their position in the tree."""
     def label_from_instance(self, obj):
         prefix = ''
         try:
@@ -85,7 +85,7 @@ class CategoryMultipleChoiceField(ModelMultipleChoiceField):
 class CategoryManyToManyField(ManyToManyField):
     """
     Simply a normal ManyToManyField, but with a custom *default* form field
-    which heirarchically displays the set of choices.
+    which hierarchically displays the set of choices.
     """
 
     # This is necessary for Django 1.7.4+

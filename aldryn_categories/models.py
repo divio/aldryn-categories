@@ -3,26 +3,18 @@
 from __future__ import unicode_literals
 
 import django
-from django.conf import settings
-from django.core.exceptions import ImproperlyConfigured
+
 from django.db import IntegrityError, models
 from django.template.defaultfilters import slugify as default_slugify
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
-from parler.models import TranslatableModel, TranslatedFields
+from parler import appsettings
 from parler.managers import TranslatableManager, TranslatableQuerySet
-
+from parler.models import TranslatableModel, TranslatedFields
 from treebeard.ns_tree import NS_Node, NS_NodeManager, NS_NodeQuerySet
 
-
-if settings.LANGUAGES:
-    LANGUAGE_CODES = [language[0] for language in settings.LANGUAGES]
-elif settings.LANGUAGE:
-    LANGUAGE_CODES = [settings.LANGUAGE]
-else:
-    raise ImproperlyConfigured(
-        'Neither LANGUAGES nor LANGUAGE was found in settings.')
+LANGUAGE_CODES = appsettings.PARLER_LANGUAGES.get_active_choices()
 
 
 class CategoryQuerySet(TranslatableQuerySet, NS_NodeQuerySet):
