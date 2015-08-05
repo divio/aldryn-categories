@@ -1,22 +1,21 @@
-.. image:: https://travis-ci.org/aldryn/aldryn-categories.svg?branch=master
-    :target: https://travis-ci.org/aldryn/aldryn-categories/
-.. image:: https://coveralls.io/repos/aldryn/aldryn-categories/badge.svg?branch=master
-    :target: https://coveralls.io/r/aldryn/aldryn-categories?branch=master
-.. image:: https://pypip.in/v/aldryn-categories/badge.svg
-    :target: https://pypi.python.org/pypi/aldryn-categories/
-.. image:: https://pypip.in/d/aldryn-categories/badge.svg
-    :target: https://pypi.python.org/pypi/aldryn-categories/
-.. image:: https://pypip.in/wheel/aldryn-categories/badge.svg
-    :target: https://pypi.python.org/pypi/aldryn-categories/
-.. image:: https://pypip.in/license/aldryn-categories/badge.svg
-    :target: https://github.com/aldryn/aldryn-categories/blob/master/LICENSE.txt
-.. image:: https://codeclimate.com/github/aldryn/aldryn-categories/badges/gpa.svg
+#################
+Aldryn Categories
+#################
+
+|pypi_version| |build_status| |coverage_status| |codeclimate|
+
+.. |pypi_version| image:: https://pypip.in/v/aldryn-categories/badge.svg
+   :target: https://pypi.python.org/pypi/aldryn-categories/
+   :alt: PyPI Version
+.. |build_status| image:: https://travis-ci.org/aldryn/aldryn-categories.svg?branch=master
+   :target: https://travis-ci.org/aldryn/aldryn-categories/
+   :alt: Build Status
+.. |coverage_status| image:: https://coveralls.io/repos/aldryn/aldryn-categories/badge.svg?branch=master
+   :target: https://coveralls.io/r/aldryn/aldryn-categories?branch=master
+   :alt: Coverage Status
+.. |codeclimate| image:: https://codeclimate.com/github/aldryn/aldryn-categories/badges/gpa.svg
    :target: https://codeclimate.com/github/aldryn/aldryn-categories
    :alt: Code Climate
-
-=================
-Aldryn Categories
-=================
 
 Description
 ~~~~~~~~~~~
