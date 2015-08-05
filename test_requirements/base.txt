@@ -1,7 +1,8 @@
 coverage==3.7.1
-python-coveralls==2.4.2
 django-parler
 django-treebeard>=2.0
 djangocms-helper
 flake8
+python-coveralls==2.4.2
 six
+tox
