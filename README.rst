@@ -10,7 +10,7 @@ Aldryn Categories
 .. |build_status| image:: https://travis-ci.org/aldryn/aldryn-categories.svg?branch=master
    :target: https://travis-ci.org/aldryn/aldryn-categories/
    :alt: Build Status
-.. |coverage_status| image:: https://coveralls.io/repos/aldryn/aldryn-categories/badge.svg?branch=master
+.. |coverage_status| image:: http://img.shields.io/coveralls/aldryn/aldryn-categories/master.svg
    :target: https://coveralls.io/r/aldryn/aldryn-categories?branch=master
    :alt: Coverage Status
 .. |codeclimate| image:: https://codeclimate.com/github/aldryn/aldryn-categories/badges/gpa.svg
