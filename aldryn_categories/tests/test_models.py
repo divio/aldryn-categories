@@ -2,18 +2,12 @@
 
 from __future__ import unicode_literals
 
-from django.conf import settings
-from django.core.exceptions import ImproperlyConfigured
 from django.test import TestCase, TransactionTestCase
 from django.utils import translation
 
 from parler.utils.context import switch_language
 
 from aldryn_categories.models import Category
-from aldryn_categories.fields import (
-    CategoryMultipleChoiceField,
-    CategoryManyToManyField,
-)
 
 from .base import CategoryTestCaseMixin
 
