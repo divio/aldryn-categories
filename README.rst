@@ -4,8 +4,8 @@ Aldryn Categories
 
 |pypi_version| |build_status| |coverage_status| |codeclimate|
 
-.. |pypi_version| image:: https://pypip.in/v/aldryn-categories/badge.svg
-   :target: https://pypi.python.org/pypi/aldryn-categories/
+.. |pypi_version| image:: http://img.shields.io/pypi/v/aldryn-categories.svg
+   :target: https://pypi.python.org/pypi/aldryn-categories
    :alt: PyPI Version
 .. |build_status| image:: https://travis-ci.org/aldryn/aldryn-categories.svg?branch=master
    :target: https://travis-ci.org/aldryn/aldryn-categories/
