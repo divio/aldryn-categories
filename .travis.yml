@@ -5,37 +5,46 @@ language: python
 # Use container based infrastructure
 sudo: false
 
-python:
-  - 2.6
-  - 2.7
-  - 3.3
-  - 3.4
-
 env:
   matrix:
-    - DJANGO=1.5 CMD=./test
-    - DJANGO=1.6 CMD=./test
-    - DJANGO=1.7 CMD=./test
+    - TOXENV=flake8
 
-matrix:
-  # allow_failures:
-  exclude:
-    - python: 2.6
-      env: DJANGO=1.7 CMD=./test
-  fast_finish: true
-  include:
-    - python: 2.7
-      env: DJANGO=1.7 CMD="flake8 aldryn_categories"
+    # py{34,33,27}-dj{18}-cms{31}
+    - TOXENV=py34-dj18-cms31
+    - TOXENV=py33-dj18-cms31
+    - TOXENV=py27-dj18-cms31
+
+    # py{34,33,27}-dj{17,16}-cms{31,30}
+    - TOXENV=py34-dj17-cms31
+    - TOXENV=py34-dj17-cms30
+    - TOXENV=py33-dj17-cms31
+    - TOXENV=py33-dj17-cms30
+    - TOXENV=py27-dj17-cms31
+    - TOXENV=py27-dj17-cms30
+    - TOXENV=py34-dj16-cms31
+    - TOXENV=py34-dj16-cms30
+    - TOXENV=py33-dj16-cms31
+    - TOXENV=py33-dj16-cms30
+    - TOXENV=py27-dj16-cms31
+    - TOXENV=py27-dj16-cms30
+
+    # py{26}-dj{16}-cms{31,30}
+    - TOXENV=py26-dj16-cms31
+    - TOXENV=py26-dj16-cms30
 
 cache:
   directories:
     - $HOME/.wheelhouse
 
 install:
-  - pip wheel --wheel-dir $HOME/.wheelhouse -r "test_requirements/django-$DJANGO.txt"
-  - pip install --use-wheel --no-index --find-links=$HOME/.wheelhouse -r "test_requirements/django-$DJANGO.txt"
+  - pip install tox
+  - pip install coveralls
 
-script: coverage run test_settings.py
+script:
+  - tox -e $TOXENV
+
+after_script:
+  - codeclimate < tests/coverage/**/lcov.info
 
 after_success: coveralls
 
