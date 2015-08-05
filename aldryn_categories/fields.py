@@ -4,7 +4,11 @@ from __future__ import unicode_literals
 # import warnings
 
 from django.core.exceptions import ImproperlyConfigured
-from django.db.models.fields.related import ForeignKey, ManyToManyField, OneToOneField
+from django.db.models.fields.related import (
+    ForeignKey,
+    ManyToManyField,
+    OneToOneField
+)
 from django.forms.models import ModelChoiceField, ModelMultipleChoiceField
 from django.utils.safestring import mark_safe
 
