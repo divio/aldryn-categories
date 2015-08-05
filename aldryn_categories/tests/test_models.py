@@ -15,19 +15,7 @@ from aldryn_categories.fields import (
     CategoryManyToManyField,
 )
 
-
-class CategoryTestCaseMixin(object):
-    """Mixin class for testing Categories"""
-
-    @staticmethod
-    def reload(node):
-        """NOTE: django-treebeard requires nodes to be reloaded via the Django
-        ORM once its sub-tree is modified for the API to work properly.
-
-        See:: https://tabo.pe/projects/django-treebeard/docs/2.0/caveats.html
-
-        This is a simple helper-method to do that."""
-        return node.__class__.objects.get(id=node.id)
+from .base import CategoryTestCaseMixin
 
 
 class TestCategories(CategoryTestCaseMixin, TransactionTestCase):
@@ -175,44 +163,3 @@ class TestCategoryParler(CategoryTestCaseMixin, TestCase):
             except:
                 self.fail("Translating to an unavailable language should not "
                           "result in an exception.")
-
-
-class TestCategoryField(CategoryTestCaseMixin, TestCase):
-
-    def test_category_multiple_choice_field(self):
-        root = Category.add_root(name="root")
-        root.save()
-        child1 = root.add_child(name="child1")
-        child2 = root.add_child(name="child2")
-        grandchild1 = child1.add_child(name="grandchild1")
-        root = self.reload(root)
-        child1 = self.reload(child1)
-        field = CategoryMultipleChoiceField(None)
-        self.assertEqual(
-            field.label_from_instance(child2),
-            "&nbsp;&nbsp;child2",
-        )
-        self.assertEqual(
-            field.label_from_instance(grandchild1),
-            "&nbsp;&nbsp;&nbsp;&nbsp;grandchild1",
-        )
-
-        # Tests that the field correctly throws an ImproperlyConfigured
-        # exception if the given object is not a Category (or something that
-        # acts like one)
-        with self.assertRaises(ImproperlyConfigured):
-            field.label_from_instance(object)
-
-        # Check that using an untranslated language does not raise exceptions
-        with switch_language(child1, 'it'):
-            try:
-                field.label_from_instance(child1)
-            except ImproperlyConfigured:
-                self.fail("Translating to an unavailable language should not "
-                          "result in an exception.")
-
-    def test_category_many_to_many_field(self):
-        field = CategoryManyToManyField(Category)
-        self.assertTrue(
-            isinstance(field.formfield(), CategoryMultipleChoiceField)
-        )
