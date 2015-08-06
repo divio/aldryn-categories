@@ -3,6 +3,6 @@
     "installed-apps": [
         "aldryn_categories",
         "parler",
-        "treebeard",
+        "treebeard"
     ]
 }
