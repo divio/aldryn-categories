@@ -20,7 +20,8 @@ setup(
     packages=find_packages(),
     platforms=['OS Independent'],
     classifiers=[
-        'Development Status :: 4 - Beta',
+        # https://pypi.python.org/pypi?%3Aaction=list_classifiers
+        'Development Status :: 5 - Production/Stable',
         'Environment :: Web Environment',
         'Framework :: Django',
         'Intended Audience :: Developers',
