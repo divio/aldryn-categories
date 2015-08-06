@@ -13,6 +13,11 @@ installed, then, add one of these field types to your model:
 - ``CategoryOneToOneField``
 - ``CategoryForeignKey``
 
+Each acts exactly like the corresponding non-Category Django version with two
+differences. First, you won't need to specify the ``to`` argument on the field
+declaration as this automatically defaults to ``Category``. Second, each
+presents the category choices in a hierarchical manner.
+
 For example, if you would like to "attach" any number of categories to your
 ``Thing`` model: ::
 
@@ -24,7 +29,7 @@ For example, if you would like to "attach" any number of categories to your
         class Thing(models.Model):
             my_field = models.CharField(...)
             ...
-            categories = CategoryManyToManyField('aldryn_categories.Category')
+            categories = CategoryManyToManyField()
 
 This usage of the ``CategoryManyToManyField`` simply allows your categories to
 be displayed hierarchically in the otherwise normal ``MultipleSelectWidget``
@@ -44,7 +49,7 @@ For example: ::
         class Thing(models.Model):
             my_field = models.CharField(...)
             ...
-            category = CategoryForeignKey('aldryn_categories.Category')
+            category = CategoryForeignKey()
 
 
 The widget produced would look like this:

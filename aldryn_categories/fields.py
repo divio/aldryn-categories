@@ -18,6 +18,8 @@ try:
 except:  # pragma: no cover
     add_introspection_rules = False
 
+from .models import Category
+
 
 class CategoryModelChoiceField(ModelChoiceField):
     """Displays choices hierarchically as per their position in the tree."""
@@ -42,6 +44,10 @@ class CategoryForeignKey(ForeignKey):
     which hierarchically displays the set of choices.
     """
 
+    def __init__(self, to=Category, **kwargs):
+        """Sets Category as the default `to` parameter."""
+        super(CategoryForeignKey, self).__init__(to, **kwargs)
+
     # This is necessary for Django 1.7.4+
     def get_internal_type(self):
         return 'ForeignKey'
@@ -58,6 +64,11 @@ class CategoryOneToOneField(OneToOneField):
     Simply a normal OneToOneField field, but with a custom *default* form field
     which hierarchically displays the set of choices.
     """
+
+    def __init__(self, to=Category, **kwargs):
+        """Sets Category as the default `to` parameter."""
+        super(CategoryOneToOneField, self).__init__(to, **kwargs)
+
     # This is necessary for Django 1.7.4+
     def get_internal_type(self):
         return 'ForeignKey'
@@ -91,6 +102,10 @@ class CategoryManyToManyField(ManyToManyField):
     Simply a normal ManyToManyField, but with a custom *default* form field
     which hierarchically displays the set of choices.
     """
+
+    def __init__(self, to=Category, **kwargs):
+        """Sets Category as the default `to` parameter."""
+        super(CategoryManyToManyField, self).__init__(to, **kwargs)
 
     # This is necessary for Django 1.7.4+
     def get_internal_type(self):
