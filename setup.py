@@ -13,7 +13,7 @@ setup(
     version=__version__,
     url='https://github.com/aldryn/aldryn-categories',
     license='BSD License',
-    description='Heirarchical categories/taxonomies for your Django project',
+    description='Hierarchical categories/taxonomies for your Django project',
     author='Divio AG',
     author_email='info@divio.ch',
     package_data={},
@@ -32,6 +32,7 @@ setup(
         'Topic :: Software Development :: Libraries',
     ],
     install_requires=[
+        'django>=1.6,<1.9',
         'django-parler>=1.2.1',
         'django-treebeard>=2.0',
     ],
