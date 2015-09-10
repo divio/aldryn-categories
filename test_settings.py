@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 HELPER_SETTINGS = {
     'SITE_ID': 1,
     'TIME_ZONE': 'Europe/Zurich',
