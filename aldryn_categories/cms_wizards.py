@@ -1,11 +1,18 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+try:
+    from urllib.parse import urlunparse  # Py3
+except ImportError:
+    from urlparse import urlunparse  # Py2
+
 from django.utils.translation import ugettext_lazy as _
+from django.utils.six.moves.urllib.parse import urlparse as six_urlparse
 
 from cms.wizards.wizard_pool import wizard_pool
 from cms.wizards.wizard_base import Wizard
 from cms.wizards.forms import BaseFormMixin
+from cms.utils import get_cms_setting
 
 from parler.forms import TranslatableModelForm
 from treebeard.forms import movenodeform_factory, MoveNodeForm
@@ -20,8 +27,15 @@ class CategoryWizard(Wizard):
         # otherwise redirect to root.
         obj = kwargs['obj']
         if hasattr(obj, 'page'):
-            return obj.page.get_absolute_url(kwargs['language'])
-        return '/'
+            url = obj.page.get_absolute_url(kwargs.get('language'))
+        else:
+            url = '/'
+        # Add 'edit' to GET params of URL
+        if self.edit_mode_on_success:
+            (scheme, netloc, path, params, query, fragment) = six_urlparse(url)
+            query = get_cms_setting('CMS_TOOLBAR_URL__EDIT_ON')
+            url = urlunparse((scheme, netloc, path, params, query, fragment))
+        return url
 
 
 class CreateCategoryForm(BaseFormMixin, TranslatableModelForm, MoveNodeForm):
