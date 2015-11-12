@@ -1,11 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-try:
-    from urllib.parse import urlunparse  # Py3
-except ImportError:
-    from urlparse import urlunparse  # Py2
-
 from django.utils.translation import ugettext_lazy as _
 
 from cms.wizards.wizard_pool import wizard_pool
