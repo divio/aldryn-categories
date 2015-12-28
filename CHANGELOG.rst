@@ -1,3 +1,9 @@
+1.0.2 (yyyy-mm-dd)
+==================
+
+* Use aldryn-translation-tools for slug generation
+
+
 1.0.1 (2015-11-12)
 ==================
 
