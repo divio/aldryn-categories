@@ -9,6 +9,8 @@ from django.template.defaultfilters import slugify as default_slugify
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
+from aldryn_translation_tools.models import (
+    TranslatedAutoSlugifyMixin, TranslationHelperMixin)
 from parler import appsettings
 from parler.managers import TranslatableManager, TranslatableQuerySet
 from parler.models import TranslatableModel, TranslatedFields
@@ -43,12 +45,14 @@ class CategoryManager(TranslatableManager, NS_NodeManager):
 #     https://gist.github.com/GaretJax/7c7a9acc055c05c65041
 #
 @python_2_unicode_compatible
-class Category(TranslatableModel, NS_Node):
+class Category(TranslatedAutoSlugifyMixin, TranslationHelperMixin,
+               TranslatableModel, NS_Node):
     """
     A category is hierarchical. The structure is implemented with django-
     treebeard's Nested Sets trees, which has the performance characteristics
     we're after, namely: fast reads at the expense of write-speed.
     """
+    slug_source_field_name = 'name'
 
     translations = TranslatedFields(
         name=models.CharField(
@@ -73,45 +77,6 @@ class Category(TranslatableModel, NS_Node):
         verbose_name_plural = _('categories')
 
     objects = CategoryManager()
-
-    def slugify(self, category, i=None):
-        slug = default_slugify(category)
-        if i is not None:
-            slug += "_%d" % i
-        return slug
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = self.slugify(self.name)
-            try:
-                return super(Category, self).save(*args, **kwargs)
-            except IntegrityError:
-                pass
-
-            for lang in LANGUAGE_CODES:
-                #
-                # We'd much rather just do something like:
-                #     Category.objects.translated(lang,
-                #         slug__startswith=self.slug)
-                # But sadly, this isn't supported by Parler/Django, see:
-                #     http://django-parler.readthedocs.org/en/latest/api/\
-                #         parler.managers.html#the-translatablequeryset-class
-                #
-                slugs = []
-                all_slugs = Category.objects.language(lang).exclude(
-                    id=self.id).values_list('translations__slug', flat=True)
-                for slug in all_slugs:
-                    if slug and slug.startswith(self.slug):
-                        slugs.append(slug)
-                i = 1
-                while True:
-                    slug = self.slugify(self.name, i)
-                    if slug not in slugs:
-                        self.slug = slug
-                        return super(Category, self).save(*args, **kwargs)
-                    i += 1
-        else:
-            return super(Category, self).save(*args, **kwargs)
 
     def delete(self, using=None):
         #

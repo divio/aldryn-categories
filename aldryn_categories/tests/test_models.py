@@ -28,9 +28,9 @@ class TestCategories(CategoryTestCaseMixin, TransactionTestCase):
         root = self.reload(root)
         self.assertEquals(root.slug, "test")
         child1 = root.add_child(name="test")
-        self.assertEquals(child1.slug, "test_1")
+        self.assertEquals(child1.slug, "test-1")
         child2 = root.add_child(name="test")
-        self.assertEquals(child2.slug, "test_2")
+        self.assertEquals(child2.slug, "test-2")
 
     def test_str(self):
         root = Category.add_root(name="test")
