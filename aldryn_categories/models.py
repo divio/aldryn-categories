@@ -4,8 +4,7 @@ from __future__ import unicode_literals
 
 import django
 
-from django.db import IntegrityError, models
-from django.template.defaultfilters import slugify as default_slugify
+from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
