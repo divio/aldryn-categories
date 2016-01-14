@@ -40,12 +40,16 @@ class TestCategories(CategoryTestCaseMixin, TransactionTestCase):
     def test_delete(self):
         root = Category.add_root(name="test")
         root.save()
+        child1 = root.add_child(name="Child 1")
+        self.assertIn(child1, root.get_children())
         try:
             root.delete()
         except TypeError:
             self.fail('Deleting a node throws a TypeError.')
         except:
             self.fail('Deleting a node throws an exception.')
+        self.assertNotIn(child1, Category.objects.all())
+
 
 
 class TestCategoryTrees(CategoryTestCaseMixin, TestCase):
