@@ -51,7 +51,7 @@ copyright = u'2015, Divio AG'
 # built documents.
 #
 # The short X.Y version.
-from aldryn_categories import __version__ as version
+from aldryn_categories import __version__ as version  # NOQA
 # The short X.Y version.
 version = version
 # The full version, including alpha/beta/rc tags.

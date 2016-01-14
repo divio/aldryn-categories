@@ -40,12 +40,29 @@ class TestCategories(CategoryTestCaseMixin, TransactionTestCase):
     def test_delete(self):
         root = Category.add_root(name="test")
         root.save()
+        child1 = root.add_child(name="Child 1")
+        self.assertIn(child1, root.get_children())
         try:
             root.delete()
         except TypeError:
             self.fail('Deleting a node throws a TypeError.')
         except:
             self.fail('Deleting a node throws an exception.')
+        self.assertNotIn(child1, Category.objects.all())
+
+    def test_non_ascii_slug_generation(self):
+        """Test slug generation for common non-ASCII types of characters"""
+        root = Category.add_root(name="Root Node")
+        root.save()
+        child1 = root.add_child(name="Germanic umlauts: ä ö ü ß Ä Ö Ü")
+        self.assertEquals(child1.slug, "germanic-umlauts-a-o-u-ss-a-o-u")
+        child2 = root.add_child(name="Slavic Cyrillic: смачні пляцки")
+        self.assertEquals(child2.slug, "slavic-cyrillic-smachni-pliatski")
+        child3 = root.add_child(name="Simplified Chinese: 美味蛋糕")
+        self.assertEquals(child3.slug, "simplified-chinese-mei-wei-dan-gao")
+        # non-ascii only slug
+        child4 = root.add_child(name="ß ў 美")
+        self.assertEquals(child4.slug, "ss-u-mei")
 
 
 class TestCategoryTrees(CategoryTestCaseMixin, TestCase):
