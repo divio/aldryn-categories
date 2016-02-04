@@ -10,8 +10,10 @@ env:
     - TOXENV=flake8
 
     # py{34,33,27}-dj{18,17,16}
+    - TOXENV=py34-dj19
     - TOXENV=py34-dj18
     - TOXENV=py33-dj18
+    - TOXENV=py27-dj19
     - TOXENV=py27-dj18
     - TOXENV=py34-dj17
     - TOXENV=py33-dj17
