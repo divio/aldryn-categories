@@ -1,7 +1,8 @@
-1.0.2 (yyyy-mm-dd)
+1.0.2 (2016-02-12)
 ==================
 
 * Use aldryn-translation-tools for slug generation
+* Improve test suite with Django 1.9 support
 
 
 1.0.1 (2015-11-12)
