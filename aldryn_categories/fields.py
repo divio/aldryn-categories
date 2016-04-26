@@ -10,6 +10,7 @@ from django.db.models.fields.related import (
     OneToOneField
 )
 from django.forms.models import ModelChoiceField, ModelMultipleChoiceField
+from django.utils.html import escape
 from django.utils.safestring import mark_safe
 
 # For South, where used.
@@ -30,7 +31,8 @@ class CategoryModelChoiceField(ModelChoiceField):
                 prefix = '&nbsp;&nbsp;' * (obj.depth - 1)
 
             return mark_safe("{prefix}{name}".format(
-                prefix=prefix, name=obj.safe_translation_getter('name')
+                prefix=prefix,
+                name=escape(obj.safe_translation_getter('name'))
             ))
         except AttributeError:
             raise ImproperlyConfigured(
