@@ -6,6 +6,7 @@ import django
 
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
+from django.utils.html import escape
 from django.utils.translation import ugettext_lazy as _
 
 from aldryn_translation_tools.models import (
@@ -86,4 +87,5 @@ class Category(TranslatedAutoSlugifyMixin, TranslationHelperMixin,
         super(TranslatableModel, self).delete()
 
     def __str__(self):
-        return self.safe_translation_getter('name', any_language=True)
+        name = self.safe_translation_getter('name', any_language=True)
+        return escape(name)

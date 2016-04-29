@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import unicode_literals
+import six
 
 from django.test import TestCase, TransactionTestCase
 from django.utils import translation
@@ -36,6 +37,13 @@ class TestCategories(CategoryTestCaseMixin, TransactionTestCase):
         root = Category.add_root(name="test")
         root.save()
         self.assertEqual(root.name, str(root))
+
+    def test_str_malicious(self):
+        malicious = "<script>alert('hi');</script>"
+        escaped = "&lt;script&gt;alert(&#39;hi&#39;);&lt;/script&gt;"
+        root = Category.add_root(name=malicious)
+        root.save()
+        self.assertEqual(six.u(str(root)), escaped)
 
     def test_delete(self):
         root = Category.add_root(name="test")

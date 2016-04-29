@@ -22,22 +22,27 @@ except:  # pragma: no cover
 from .models import Category
 
 
-class CategoryModelChoiceField(ModelChoiceField):
-    """Displays choices hierarchically as per their position in the tree."""
+class CategoryLabelFromInstanceMixin(object):
+    error_message = ''
+
     def label_from_instance(self, obj):
         prefix = ''
         try:
             if obj.depth > 1:
                 prefix = '&nbsp;&nbsp;' * (obj.depth - 1)
-
-            return mark_safe("{prefix}{name}".format(
-                prefix=prefix,
-                name=escape(obj.safe_translation_getter('name'))
-            ))
+            name = obj.safe_translation_getter('name')
+            label = "{prefix}{name}".format(prefix=prefix, name=escape(name))
+            return mark_safe(label)
         except AttributeError:
-            raise ImproperlyConfigured(
-                "CategoryModelChoiceField should only be used for ForeignKey "
-                "relations to the aldryn_categories.Category model.")
+            raise ImproperlyConfigured(self.error_message)
+
+
+class CategoryModelChoiceField(CategoryLabelFromInstanceMixin,
+                               ModelChoiceField):
+    """Displays choices hierarchically as per their position in the tree."""
+    error_message = (
+        "CategoryModelChoiceField should only be used for ForeignKey "
+        "relations to the aldryn_categories.Category model.")
 
 
 class CategoryForeignKey(ForeignKey):
@@ -82,21 +87,12 @@ class CategoryOneToOneField(OneToOneField):
         return super(OneToOneField, self).formfield(**kwargs)
 
 
-class CategoryMultipleChoiceField(ModelMultipleChoiceField):
+class CategoryMultipleChoiceField(CategoryLabelFromInstanceMixin,
+                                  ModelMultipleChoiceField):
     """Displays choices hierarchically as per their position in the tree."""
-    def label_from_instance(self, obj):
-        prefix = ''
-        try:
-            if obj.depth > 1:
-                prefix = '&nbsp;&nbsp;' * (obj.depth - 1)
-
-            return mark_safe("{prefix}{name}".format(
-                prefix=prefix, name=obj.safe_translation_getter('name')
-            ))
-        except AttributeError:
-            raise ImproperlyConfigured(
-                "CategoryMultipleChoiceField should only be used for M2M "
-                "relations to the aldryn_categories.Category model.")
+    error_message = (
+        "CategoryMultipleChoiceField should only be used for M2M "
+        "relations to the aldryn_categories.Category model.")
 
 
 class CategoryManyToManyField(ManyToManyField):
