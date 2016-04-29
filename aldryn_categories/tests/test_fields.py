@@ -65,6 +65,8 @@ class TestCategoryField(CategoryTestCaseMixin, TestCase):
         child1 = root.add_child(name="child1")
         child2 = root.add_child(name="child2")
         grandchild1 = child1.add_child(name="grandchild1")
+        bad_grandchild = child1.add_child(
+            name='bad grandchild<script>alert("bad stuff");</script>')
         root = self.reload(root)
         child1 = self.reload(child1)
         field = CategoryMultipleChoiceField(None)
@@ -75,6 +77,11 @@ class TestCategoryField(CategoryTestCaseMixin, TestCase):
         self.assertEqual(
             field.label_from_instance(grandchild1),
             "&nbsp;&nbsp;&nbsp;&nbsp;grandchild1",
+        )
+        self.assertEqual(
+            field.label_from_instance(bad_grandchild),
+            '&nbsp;&nbsp;&nbsp;&nbsp;bad grandchild&lt;script&gt;alert'
+            '(&quot;bad stuff&quot;);&lt;/script&gt;',
         )
 
         # Tests that the field correctly throws an ImproperlyConfigured
