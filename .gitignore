@@ -9,3 +9,4 @@ build
 .idea
 .tox
 docs/_build
+requirements.txt

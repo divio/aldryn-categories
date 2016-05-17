@@ -1,0 +1,5 @@
+django>=1.6,<1.7
+South>=1.0.2
+django-treebeard<4.0
+
+-r base.txt
