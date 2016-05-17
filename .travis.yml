@@ -14,8 +14,6 @@ env:
     # py{34,33,27}-dj{18,17,16}
     - TOXENV=py35-dj19
     - TOXENV=py35-dj18
-    - TOXENV=py35-dj17
-    - TOXENV=py35-dj16
     - TOXENV=py34-dj19
     - TOXENV=py34-dj18
     - TOXENV=py34-dj17
