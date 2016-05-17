@@ -117,7 +117,7 @@ class CategoryManyToManyField(ManyToManyField):
 
 
 # This is necessary for South
-if add_introspection_rules:
+if add_introspection_rules:  # pragma: no cover
     add_introspection_rules([], [
         "^aldryn_categories\.fields\.CategoryForeignKey",
         "^aldryn_categories\.fields\.CategoryManyToManyField",
