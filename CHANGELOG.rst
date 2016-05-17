@@ -1,3 +1,11 @@
+1.0.3 (2016-05-17)
+==================
+
+* Escape category names in custom model fields
+* Minor adjustments to admin presentation
+* Update test environments, config
+
+
 1.0.2 (2016-02-12)
 ==================
 
