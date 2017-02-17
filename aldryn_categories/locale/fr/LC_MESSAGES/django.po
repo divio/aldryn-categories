@@ -19,28 +19,28 @@ msgstr ""
 
 #: cms_wizards.py:36
 msgid "New category"
-msgstr ""
+msgstr "Nouvelle catégorie"
 
 #: cms_wizards.py:39
 msgid "Create a new category."
-msgstr ""
+msgstr "Créer une nouvelle catégorie"
 
 #: models.py:59
 msgid "name"
-msgstr ""
+msgstr "nom"
 
 #: models.py:65
 msgid "slug"
-msgstr ""
+msgstr "slug"
 
 #: models.py:68
 msgid "Provide a “slug” or leave blank for an automatically generated one."
-msgstr ""
+msgstr "Indiquez un slug ou laissez vide pour qu'il soit généré automatiquement"
 
 #: models.py:76
 msgid "category"
-msgstr ""
+msgstr "catégorie"
 
 #: models.py:77
 msgid "categories"
-msgstr ""
+msgstr "catégories"
