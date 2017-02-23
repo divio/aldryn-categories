@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+
 HELPER_SETTINGS = {
     'SITE_ID': 1,
     'TIME_ZONE': 'Europe/Zurich',
@@ -33,6 +34,7 @@ HELPER_SETTINGS = {
 def run():
     from djangocms_helper import runner
     runner.run('aldryn_categories')
+
 
 if __name__ == "__main__":
     run()
