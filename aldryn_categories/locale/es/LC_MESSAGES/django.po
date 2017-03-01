@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-20 14:58+0200\n"
+"POT-Creation-Date: 2017-03-01 11:38-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Language-Team: Spanish (https://www.transifex.com/divio/teams/58664/es/)\n"
 "MIME-Version: 1.0\n"
@@ -16,6 +16,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: admin.py:19
+msgid "Position"
+msgstr ""
+
+#: admin.py:20
+msgid "Relative to"
+msgstr ""
 
 #: cms_wizards.py:36
 msgid "New category"
