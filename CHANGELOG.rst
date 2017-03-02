@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-1.0.4 (UNRELEASED)
+1.0.4 (2017-03-02)
 ------------------
 
 * Added translations from Transifex
