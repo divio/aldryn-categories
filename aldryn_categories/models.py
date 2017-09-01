@@ -83,6 +83,10 @@ class Category(TranslatedAutoSlugifyMixin, TranslationHelperMixin,
         # We're simply managing how the two superclasses perform deletion
         # together here.
         #
+        # FIXME: We should pass using (and other kwargs) along.
+        #        There currently is a bug in parler where it will pass along
+        #        'using' as a positional argument, which does not work in
+        #        Djangos implementation.
         self.__class__.objects.filter(pk=self.pk).delete(using)
         super(TranslatableModel, self).delete()
 

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import unicode_literals
-# import warnings
 
 from django.core.exceptions import ImproperlyConfigured
 from django.db.models.fields.related import (
@@ -12,12 +11,6 @@ from django.db.models.fields.related import (
 from django.forms.models import ModelChoiceField, ModelMultipleChoiceField
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
-
-# For South, where used.
-try:
-    from south.modelsinspector import add_introspection_rules
-except:  # pragma: no cover
-    add_introspection_rules = False
 
 from .models import Category
 
@@ -114,12 +107,3 @@ class CategoryManyToManyField(ManyToManyField):
         kwargs["form_class"] = form_class
         kwargs["choices_form_class"] = choices_form_class
         return super(CategoryManyToManyField, self).formfield(**kwargs)
-
-
-# This is necessary for South
-if add_introspection_rules:  # pragma: no cover
-    add_introspection_rules([], [
-        "^aldryn_categories\.fields\.CategoryForeignKey",
-        "^aldryn_categories\.fields\.CategoryManyToManyField",
-        "^aldryn_categories\.fields\.CategoryOneToOneField"
-    ])
