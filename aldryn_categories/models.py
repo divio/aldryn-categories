@@ -78,17 +78,18 @@ class Category(TranslatedAutoSlugifyMixin, TranslationHelperMixin,
 
     objects = CategoryManager()
 
-    def delete(self, using=None):
+    def delete(self, **kwargs):
         #
-        # We're simply managing how the two superclasses perform deletion
-        # together here.
+        # We're managing how the two superclasses (TranslateableModel and
+        # NS_Node) perform deletion together here.
         #
-        # FIXME: We should pass using (and other kwargs) along.
-        #        There currently is a bug in parler where it will pass along
-        #        'using' as a positional argument, which does not work in
-        #        Djangos implementation.
-        self.__class__.objects.filter(pk=self.pk).delete(using)
-        super(TranslatableModel, self).delete()
+        # INFO: There currently is a bug in parler where it will pass along
+        #       'using' as a positional argument, which does not work in
+        #       Djangos implementation. So we skip it.
+        self.__class__.objects.filter(pk=self.pk).delete(**kwargs)
+        from parler.cache import _delete_cached_translations
+        _delete_cached_translations(self)
+        models.Model.delete(self, **kwargs)
 
     def __str__(self):
         name = self.safe_translation_getter('name', any_language=True)
