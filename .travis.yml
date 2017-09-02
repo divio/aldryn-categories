@@ -7,21 +7,34 @@ python: 3.5
 # Use container based infrastructure
 sudo: false
 
-env:
-  matrix:
-    - TOXENV=flake8
-
-    # py{34,33,27}-dj{18,17,16}
-    - TOXENV=py35-dj111
-    - TOXENV=py35-dj110
-    - TOXENV=py35-dj19
-    - TOXENV=py35-dj18
-    - TOXENV=py34-dj19
-    - TOXENV=py34-dj18
-    - TOXENV=py27-dj111
-    - TOXENV=py27-dj110
-    - TOXENV=py27-dj19
-    - TOXENV=py27-dj18
+matrix:
+  include:
+    - python: '3.5'
+      env: TOXENV=flake8
+    - python: '3.6'
+      env: TOXENV=py36-dj111
+    - python: '3.6'
+      env: TOXENV=py36-dj110
+    - python: '3.6'
+      env: TOXENV=py36-dj19
+    - python: '3.6'
+      env: TOXENV=py36-dj18
+    - python: '3.5'
+      env: TOXENV=py35-dj111
+    - python: '3.5'
+      env: TOXENV=py35-dj110
+    - python: '3.5'
+      env: TOXENV=py35-dj19
+    - python: '3.5'
+      env: TOXENV=py35-dj18
+    - python: '2.7'
+      env: TOXENV=py27-dj111
+    - python: '2.7'
+      env: TOXENV=py27-dj110
+    - python: '2.7'
+      env: TOXENV=py27-dj19
+    - python: '2.7'
+      env: TOXENV=py27-dj18
 
 cache:
   directories:
