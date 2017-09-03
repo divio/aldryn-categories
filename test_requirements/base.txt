@@ -1,6 +1,6 @@
 aldryn-translation-tools>=0.2.1,<0.3
 coverage==3.7.1
-django-parler==1.6
+django-parler
 djangocms-helper>=0.9.1
 flake8
 python-coveralls==2.4.2

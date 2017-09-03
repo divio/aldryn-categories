@@ -24,7 +24,7 @@ class CategoryWizard(Wizard):
 
 class CreateCategoryForm(BaseFormMixin, TranslatableModelForm, MoveNodeForm):
     """
-    The model form for Category wizad.
+    The model form for Category wizard.
     """
 
     class Meta:
@@ -33,10 +33,10 @@ class CreateCategoryForm(BaseFormMixin, TranslatableModelForm, MoveNodeForm):
 
 
 aldryn_category_wizard = CategoryWizard(
-    title=_(u"New category"),
+    title=_('New category'),
     weight=290,
     form=movenodeform_factory(Category, form=CreateCategoryForm),
-    description=_(u"Create a new category.")
+    description=_('Create a new category.')
 )
 
 wizard_pool.register(aldryn_category_wizard)
