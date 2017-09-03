@@ -1,6 +1,14 @@
 CHANGELOG
 =========
 
+1.1.0 (2017-09-02)
+------------------
+
+* Drop Django<1.8
+* Drop Python<2.7
+* Add Django 1.10 and 1.11
+* Fix Category deletion
+
 1.0.4 (2017-03-02)
 ------------------
 
