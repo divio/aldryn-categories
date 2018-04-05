@@ -2,8 +2,6 @@
 
 from __future__ import unicode_literals
 
-import django
-
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.html import escape
@@ -31,9 +29,6 @@ class CategoryManager(TranslatableManager, NS_NodeManager):
             self.model,
             using=self._db
         ).order_by('tree_id', 'lft')
-
-    if django.VERSION < (1, 8):  # pragma: no cover
-        get_query_set = get_queryset
 
 
 #

@@ -54,7 +54,7 @@ class TestCategories(CategoryTestCaseMixin, TransactionTestCase):
             root.delete()
         except TypeError:
             self.fail('Deleting a node throws a TypeError.')
-        except:
+        except Exception:
             self.fail('Deleting a node throws an exception.')
         self.assertNotIn(child1, Category.objects.all())
 
@@ -179,6 +179,6 @@ class TestCategoryParler(CategoryTestCaseMixin, TestCase):
         with switch_language(node, 'it'):
             try:
                 node.name
-            except:
+            except Exception:
                 self.fail("Translating to an unavailable language should not "
                           "result in an exception.")

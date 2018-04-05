@@ -30,8 +30,8 @@ request, please review our `guidelines for Aldryn addons <http://docs.aldryn.com
 Requirements
 ************
 
-1. Python v2.6+
-2. Django v1.6.x + South v1.0.2+ (see note below) or Django v1.7+
+1. Python 2.7, 3.4, 3.5, 3.6
+2. Django 1.8 - 1.11
 3. django-treebeard v2.0+
 4. django-parler v1.2.1+
 
