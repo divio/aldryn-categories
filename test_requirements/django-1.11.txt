@@ -1,4 +1,0 @@
-django>=1.11,<1.12
-django-treebeard>=4.0.1
-
--r base.txt

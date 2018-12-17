@@ -20,14 +20,12 @@ setup(
     packages=find_packages(),
     platforms=['OS Independent'],
     classifiers=[
-        # https://pypi.python.org/pypi?%3Aaction=list_classifiers
         'Development Status :: 5 - Production/Stable',
         'Environment :: Web Environment',
         'Framework :: Django',
-        'Framework :: Django :: 1.8',
-        'Framework :: Django :: 1.9',
-        'Framework :: Django :: 1.10',
         'Framework :: Django :: 1.11',
+        'Framework :: Django :: 2.0',
+        'Framework :: Django :: 2.1',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Operating System :: OS Independent',
@@ -41,10 +39,10 @@ setup(
         'Topic :: Software Development :: Libraries',
     ],
     install_requires=[
-        'django>=1.8,<2',
-        'django-parler>=1.2.1',
-        'django-treebeard>=2.0',
-        'aldryn-translation-tools>=0.2.1',
+        'django>=1.11',
+        'django-parler',
+        'django-treebeard',
+        'aldryn-translation-tools',
     ],
     include_package_data=True,
     zip_safe=False

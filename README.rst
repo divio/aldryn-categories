@@ -1,6 +1,6 @@
-#################
+==================
 Aldryn Categories
-#################
+==================
 
 |pypi_version| |build_status| |coverage_status| |codeclimate|
 
@@ -17,23 +17,23 @@ Developers should also note that the project maintains
 for this project.
 
 
-************
+============
 Contributing
-************
+============
 
 Aldryn Categories is a an open-source project. We'll be delighted to receive your
 feedback in the form of issues and pull requests. Before submitting your pull
 request, please review our `guidelines for Aldryn addons <http://docs.aldryn.com/en/latest/reference/addons/index.html>`_.
 
 
-************
+============
 Requirements
-************
+============
 
 1. Python 2.7, 3.4, 3.5, 3.6
-2. Django 1.8 - 1.11
-3. django-treebeard v2.0+
-4. django-parler v1.2.1+
+2. Django 1.11, 2.0, 2.1
+3. django-treebeard v4.3+
+4. django-parler v1.9.2+
 
 
 .. |pypi_version| image:: http://img.shields.io/pypi/v/aldryn-categories.svg

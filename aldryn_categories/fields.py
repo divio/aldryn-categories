@@ -6,7 +6,8 @@ from django.core.exceptions import ImproperlyConfigured
 from django.db.models.fields.related import (
     ForeignKey,
     ManyToManyField,
-    OneToOneField
+    OneToOneField,
+    CASCADE
 )
 from django.forms.models import ModelChoiceField, ModelMultipleChoiceField
 from django.utils.html import escape
@@ -46,6 +47,7 @@ class CategoryForeignKey(ForeignKey):
 
     def __init__(self, to=Category, **kwargs):
         """Sets Category as the default `to` parameter."""
+        kwargs['on_delete'] = getattr(kwargs, 'on_delete', CASCADE)
         super(CategoryForeignKey, self).__init__(to, **kwargs)
 
     # This is necessary for Django 1.7.4+
@@ -67,6 +69,7 @@ class CategoryOneToOneField(OneToOneField):
 
     def __init__(self, to=Category, **kwargs):
         """Sets Category as the default `to` parameter."""
+        kwargs['on_delete'] = getattr(kwargs, 'on_delete', CASCADE)
         super(CategoryOneToOneField, self).__init__(to, **kwargs)
 
     # This is necessary for Django 1.7.4+

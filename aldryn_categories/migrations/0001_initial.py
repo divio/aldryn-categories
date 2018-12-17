@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import django.db.models.deletion
 from django.db import models, migrations
 
 
@@ -32,7 +33,7 @@ class Migration(migrations.Migration):
                 ('language_code', models.CharField(max_length=15, choices=[('en', 'English')], verbose_name='Language', db_index=True)),
                 ('name', models.CharField(default='', max_length=255, verbose_name='name')),
                 ('slug', models.SlugField(max_length=255, verbose_name='slug', help_text='Provide a “slug” or leave blank for an automatically generated one.')),
-                ('master', models.ForeignKey(editable=False, to='aldryn_categories.Category', null=True, related_name='translations')),
+                ('master', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, editable=False, to='aldryn_categories.Category', null=True, related_name='translations')),
             ],
             options={
                 'default_permissions': (),
